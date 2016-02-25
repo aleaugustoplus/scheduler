@@ -23,7 +23,7 @@ private:
 	int Day;
 	int Month;
 	int Year;
-	int TimeOn;
+	long TimeOn;
 	int ExecDaily;
 	Motor *motor;
 	Type type;
@@ -34,12 +34,13 @@ private:
 	bool CheckDate();
 public:
 	Task(Type type, Motor *motor);
-	Task(int Hour, int Minute, int TimeOn, Motor *motor);
-	Task(int Hour, int Minute, int Day, int Month, int Year, int TimeOn, Motor *motor);
+	Task(int Hour, int Minute, long TimeOn, Motor *motor);
+	Task(int Hour, int Minute, int Day, int Month, int Year, long TimeOn, Motor *motor);
 
 	virtual ~Task();
 	void Verify();
 
+	void ToChar(char *);
 	int getDay();
 	void setDay(int day);
 	int getHour();
@@ -48,8 +49,8 @@ public:
 	void setMinute(int minute);
 	int getMonth();
 	void setMonth(int month);
-	int getTimeOn();
-	void setTimeOn(int timeOn);
+	long getTimeOn();
+	void setTimeOn(long timeOn);
 	Type getType();
 	void setType(Type type);
 	int getYear();

@@ -22,7 +22,7 @@ Task::Task(Type type, Motor *motor)
 	this->ExecDaily=100;
 }
 //------------------------------------------------------------------------------
-Task::Task(int Hour, int Minute, int TimeOn, Motor *motor)
+Task::Task(int Hour, int Minute, long TimeOn, Motor *motor)
 {
 	this->Hour=Hour;
 	this->Minute=Minute;
@@ -35,7 +35,7 @@ Task::Task(int Hour, int Minute, int TimeOn, Motor *motor)
 	this->ExecDaily=100;
 }
 //------------------------------------------------------------------------------
-Task::Task(int Hour, int Minute, int Day, int Month, int Year, int TimeOn, Motor *motor)
+Task::Task(int Hour, int Minute, int Day, int Month, int Year, long TimeOn, Motor *motor)
 {
 	this->Hour=Hour;
 	this->Minute=Minute;
@@ -92,6 +92,20 @@ bool Task::CheckDate()
 	return false;
 }
 //------------------------------------------------------------------------------
+void Task::ToChar(char *Msg)
+{
+	switch(type)
+	{
+		case DAILY:
+			   sprintf(Msg,"Agendado diario: %02d:%02d Tempo Ligado: %u", Hour, Minute, TimeOn);
+		break;
+		case DATE:
+			   sprintf(Msg,"Agendado Data: %02d:%02d %02d/%02d/%04d Tempo Ligado: %u", Hour, Minute, Day, Month, Year, TimeOn);
+		break;
+
+	}
+}
+//------------------------------------------------------------------------------
 void Task::ExecuteEvent()
 {
 	motor->Run();
@@ -139,12 +153,12 @@ void Task::setMonth(int month)
 	Month = month;
 }
 //------------------------------------------------------------------------------
-int Task::getTimeOn()
+long Task::getTimeOn()
 {
 	return TimeOn;
 }
 //------------------------------------------------------------------------------
-void Task::setTimeOn(int timeOn)
+void Task::setTimeOn(long timeOn)
 {
 	TimeOn = timeOn;
 }
